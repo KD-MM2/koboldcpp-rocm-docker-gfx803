@@ -1,0 +1,28 @@
+services:
+  koboldcpp-rocm:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+    ports:
+      - ${HOST_PORT}:${CONTAINER_PORT}
+    env_file: .env
+    environment:
+      HOST: "${HOST}"
+      CONTAINER_PORT: "${CONTAINER_PORT}"
+      HOST_PORT: "${HOST_PORT}"
+      MODEL_PATH: "${MODEL_PATH}"
+      GPU_LAYERS: "${GPU_LAYERS}"
+    volumes:
+      - ./models:/models
+    devices:
+      - /dev/kfd
+      - /dev/dri
+    security_opt:
+      - seccomp=unconfined
+networks:
+  default:
+    enable_ipv6: true
+
