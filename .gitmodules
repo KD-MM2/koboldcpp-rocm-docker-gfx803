@@ -1,0 +1,3 @@
+[submodule "koboldcpp-rocm"]
+	path = koboldcpp-rocm
+	url = https://github.com/YellowRoseCx/koboldcpp-rocm.git
